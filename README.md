@@ -100,7 +100,7 @@ discovered unit. No unit is ever dropped silently.
     │   ├── export/          Excel, CSV, manifest, quality report
     │   ├── api/             FastAPI application
     │   └── cli.py
-    ├── configurations/      YAML only — never code
+    ├── configurations/      YAML only - never code
     │   └── quebec-city/
     │       ├── source.yaml
     │       ├── identity.yaml
@@ -215,10 +215,10 @@ unreleased section automatically.
 
 ## Documentation
 
-- `docs/architecture.md` — system design and boundaries
-- `docs/data-model.md` — canonical model and ledger schema
-- `docs/ip-schedule.md` — Background IP, deliverables, licences
-- `docs/third-party-licences.md` — dependency licence register
+- `docs/architecture.md` - system design and boundaries
+- `docs/data-model.md` - canonical model and ledger schema
+- `docs/ip-schedule.md` - Background IP, deliverables, licences
+- `docs/third-party-licences.md` - dependency licence register
 
 ---
 
