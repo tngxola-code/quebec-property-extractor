@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Error taxonomy: PropLedgerError base with structured context, plus
+  ConfigurationError, ArtifactError, UnsupportedVersionError, MappingError,
+  TransformError, IdentityCollisionError, ValidationError, ReconciliationError,
+  LedgerError, and PlanLimitError.
+- Every error carries a context dictionary and serialises via to_dict()
+  for uniform logging, API problem responses, and ledger audit trails.
+- Canonical observation model: ProcessingOutcome, SourceArtifact, FieldLineage, PropertyIdentity, CanonicalObservation, RunSummary.
+- Field-level lineage on every observation, linking each published value back to its raw XML tag, transformation, mapping version, and run.
+- RunSummary.reconciled encodes the block-on-imbalance guarantee.
 - Subscription tier model: Explorer, Professional, Business, Enterprise, Data Partner.
 - Machine-readable pricing in `configurations/pricing.yaml`.
 - Plan enforcement dependency for FastAPI.
