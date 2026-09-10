@@ -1,0 +1,14 @@
+municipality_code: "QC-REPLACE"
+display_name: "Replace with municipality name"
+publisher: "Replace with publisher"
+licence: "Replace with publisher licence terms"
+registry:
+  index_url: "https://example.gouv.qc.ca/"
+  cadence: "annual"
+  supported_versions: ["2.9"]
+  default_mapping: "2.9"
+retrieval:
+  timeout_seconds: 120
+  user_agent: "PropLedger-Quebec/0.1 (+contact@example.com)"
+  atomic_write: true
+  verify_sha256: true

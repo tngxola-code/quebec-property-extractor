@@ -1,0 +1,49 @@
+# Data — never commit
+data/
+*.xml
+*.csv
+*.parquet
+*.feather
+*.xlsx
+*.fgdb
+*.geojson
+!tests/fixtures/anonymised-*.xml
+!tests/fixtures/anonymised-*.csv
+
+# Client material — lives in a separate repository
+deliveries/
+client-exports/
+clients/
+customer-data/
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+release_notes.md

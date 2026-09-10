@@ -1,0 +1,9 @@
+# Extending RL0104A-D to RL0104F removed observed collisions in the QC pilot.
+components:
+  - RL0104A
+  - RL0104B
+  - RL0104C
+  - RL0104D
+  - RL0104F
+separator: "|"
+on_collision: "reject"

@@ -1,0 +1,94 @@
+version: "1"
+currency: CAD
+billing_provider: stripe
+
+tiers:
+  explorer:
+    display_name: Explorer
+    monthly_cad: 0
+    annual_cad: 0
+    limits:
+      municipalities: 1
+      history_years: 1
+      portfolio_properties: 0
+      api_calls_per_month: 0
+      seats: 1
+      exports_enabled: false
+      alerts_enabled: false
+      sso_enabled: false
+
+  professional:
+    display_name: Professional
+    monthly_cad: 99
+    annual_cad: 990
+    limits:
+      municipalities: 2
+      history_years: 3
+      portfolio_properties: 0
+      api_calls_per_month: 0
+      seats: 1
+      exports_enabled: true
+      alerts_enabled: true
+      sso_enabled: false
+
+  business:
+    display_name: Business
+    monthly_cad: 349
+    annual_cad: 3490
+    limits:
+      municipalities: 5
+      history_years: null
+      portfolio_properties: 500
+      api_calls_per_month: 10000
+      seats: 10
+      exports_enabled: true
+      alerts_enabled: true
+      sso_enabled: false
+
+  enterprise:
+    display_name: Enterprise
+    monthly_cad: 1499
+    annual_cad: 14990
+    limits:
+      municipalities: null
+      history_years: null
+      portfolio_properties: null
+      api_calls_per_month: null
+      seats: null
+      exports_enabled: true
+      alerts_enabled: true
+      sso_enabled: true
+
+  data_partner:
+    display_name: Data Partner
+    monthly_cad: null
+    annual_cad: null
+    limits:
+      municipalities: null
+      history_years: null
+      portfolio_properties: null
+      api_calls_per_month: null
+      seats: null
+      exports_enabled: true
+      alerts_enabled: true
+      sso_enabled: true
+
+addons:
+  additional_municipality:
+    price_cad: 49
+    unit: per_month
+  additional_portfolio_properties:
+    price_cad: 0.10
+    unit: per_property_per_month
+    above: 500
+  additional_api_calls:
+    price_cad: 0.005
+    unit: per_call
+    above: 10000
+  historical_backfill:
+    price_cad: 499
+    unit: one_time
+    per: municipality_year
+  custom_reconciliation_report:
+    price_cad: 249
+    unit: one_time
