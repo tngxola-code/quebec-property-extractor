@@ -57,9 +57,8 @@ configuration-driven platform.
 
 ## Architecture at a glance
 
-    discover ─► acquire ─► verify ─► detect version ─► map ─► transform
-        ─► validate ─► assign terminal outcome ─► reconcile ─► publish
-        ─► change detection ─► reports / API / portfolio alerts
+<img width="6983" height="310" alt="propledger-quebec-architecure-at-a-glance" src="https://github.com/user-attachments/assets/d8bd2c25-d172-4cc6-874e-36b81b0f8583" />
+
 
 The pipeline assigns **exactly one terminal outcome** to every
 discovered unit. No unit is ever dropped silently.
