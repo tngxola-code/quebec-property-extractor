@@ -1,0 +1,22 @@
+version: "2.9"
+record_tag: "RLUEx"
+version_detect:
+  path: "//VERSION"
+  expected_values: ["2.9"]
+fields:
+  roll_year:
+    raw_tag: "RL0101A"
+    transform: "int"
+  assessment_effective_date:
+    raw_tag: "RL0102A"
+    transform: "date_yyyymmdd"
+  assessed_land_value:
+    raw_tag: "RL0301A"
+    transform: "decimal_cad"
+  assessed_building_value:
+    raw_tag: "RL0302A"
+    transform: "decimal_cad"
+  cadastral_reference:
+    raw_tag: "RL0105A"
+    transform: "text"
+    cardinality: "many"
