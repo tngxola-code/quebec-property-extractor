@@ -57,8 +57,26 @@ configuration-driven platform.
 
 ## Architecture at a glance
 
-<img width="6983" height="310" alt="propledger-quebec-architecure-at-a-glance" src="https://github.com/user-attachments/assets/d8bd2c25-d172-4cc6-874e-36b81b0f8583" />
-
+```mermaid
+flowchart TD
+    subgraph Acquisition
+        A[discover] --> B[acquire] --> C[verify]
+    end
+    subgraph Interpretation
+        C --> D[detect version] --> E[map] --> F[transform]
+    end
+    subgraph Assurance
+        F --> G[validate] --> H[assign terminal outcome] --> I[reconcile]
+    end
+    subgraph Publication
+        I --> J[publish] --> K[change detection]
+    end
+    subgraph Consumption
+        K --> L[reports]
+        K --> M[API]
+        K --> N[portfolio alerts]
+    end
+```
 
 The pipeline assigns **exactly one terminal outcome** to every
 discovered unit. No unit is ever dropped silently.
