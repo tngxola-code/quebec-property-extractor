@@ -1,4 +1,5 @@
 """Safe streaming reader. Populated by feature/safe-xml-parser."""
+
 from __future__ import annotations
 
 from lxml import etree

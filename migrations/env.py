@@ -1,4 +1,5 @@
 """Alembic environment. Reads DATABASE_URL from the environment."""
+
 from __future__ import annotations
 
 import os

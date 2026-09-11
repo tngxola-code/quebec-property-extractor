@@ -3,6 +3,7 @@
 Pure domain module. No I/O, no SQLAlchemy, no FastAPI.
 Loading is explicit and cached; nothing runs at import time.
 """
+
 from __future__ import annotations
 
 from enum import StrEnum

@@ -3,6 +3,7 @@
 Consumes the tenant from the auth dependency and raises 403 when the
 requested resource exceeds the tenant's plan limits.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass

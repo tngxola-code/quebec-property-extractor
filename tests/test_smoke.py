@@ -1,4 +1,5 @@
 """Smoke tests - package imports and stable contract."""
+
 from __future__ import annotations
 
 from fastapi.testclient import TestClient

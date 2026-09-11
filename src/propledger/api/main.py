@@ -1,4 +1,5 @@
 """FastAPI application. Populated by feature/api-app."""
+
 from __future__ import annotations
 
 from fastapi import FastAPI

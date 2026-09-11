@@ -1,4 +1,5 @@
 """Plan tier tests. Pure domain, no I/O beyond reading the YAML once."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -46,8 +47,13 @@ def test_enterprise_is_unlimited(plans):
 
 
 def test_pricing_monotonic(plans):
-    prices = [plans[t].monthly_cad for t in (
-        PlanTier.EXPLORER, PlanTier.PROFESSIONAL,
-        PlanTier.BUSINESS, PlanTier.ENTERPRISE,
-    )]
+    prices = [
+        plans[t].monthly_cad
+        for t in (
+            PlanTier.EXPLORER,
+            PlanTier.PROFESSIONAL,
+            PlanTier.BUSINESS,
+            PlanTier.ENTERPRISE,
+        )
+    ]
     assert prices == sorted(prices)
