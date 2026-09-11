@@ -7,7 +7,6 @@ data needed to fix it." No error should be raised without context.
 The base class implements to_dict() so logging, API responses, and
 ledger audit trails can serialise any error uniformly.
 """
-
 from __future__ import annotations
 
 from typing import Any
@@ -53,7 +52,6 @@ class PropLedgerError(Exception):
 
 # --- Configuration ---
 
-
 class ConfigurationError(PropLedgerError):
     """A configuration file is missing, malformed, or internally inconsistent.
 
@@ -63,7 +61,6 @@ class ConfigurationError(PropLedgerError):
 
 
 # --- Acquisition ---
-
 
 class ArtifactError(PropLedgerError):
     """The source artifact could not be fetched, verified, or stored.
@@ -76,7 +73,6 @@ class ArtifactError(PropLedgerError):
 
 # --- Ingestion ---
 
-
 class UnsupportedVersionError(PropLedgerError):
     """The source declares a MEFQ version not in the supported set.
 
@@ -87,7 +83,6 @@ class UnsupportedVersionError(PropLedgerError):
 
 
 # --- Mapping and transform ---
-
 
 class MappingError(PropLedgerError):
     """The mapping specification is invalid or incompatible with the source.
@@ -108,7 +103,6 @@ class TransformError(PropLedgerError):
 
 # --- Identity ---
 
-
 class IdentityCollisionError(PropLedgerError):
     """Two or more discovered units produced the same identity key.
 
@@ -119,7 +113,6 @@ class IdentityCollisionError(PropLedgerError):
 
 # --- Validation ---
 
-
 class ValidationError(PropLedgerError):
     """A record failed a configured validation rule.
 
@@ -129,7 +122,6 @@ class ValidationError(PropLedgerError):
 
 
 # --- Reconciliation ---
-
 
 class ReconciliationError(PropLedgerError):
     """Discovered units do not equal terminal outcomes.
@@ -142,7 +134,6 @@ class ReconciliationError(PropLedgerError):
 
 # --- Ledger ---
 
-
 class LedgerError(PropLedgerError):
     """A ledger operation failed: insert, query, or immutability violation.
 
@@ -152,7 +143,6 @@ class LedgerError(PropLedgerError):
 
 
 # --- API ---
-
 
 class PlanLimitError(PropLedgerError):
     """A request exceeded the tenant's plan limits.

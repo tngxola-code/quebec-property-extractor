@@ -1,5 +1,4 @@
 """Canonical model tests. Pure domain, no I/O."""
-
 from __future__ import annotations
 
 from datetime import UTC, date, datetime
@@ -36,7 +35,8 @@ def _identity() -> PropertyIdentity:
     return PropertyIdentity(
         identity_key="A|B|C|D|F",
         municipality_code="QC-QUEBEC-CITY",
-        components={"RL0104A": "A", "RL0104B": "B", "RL0104C": "C", "RL0104D": "D", "RL0104F": "F"},
+        components={"RL0104A": "A", "RL0104B": "B", "RL0104C": "C",
+                    "RL0104D": "D", "RL0104F": "F"},
         confidence="stable",
     )
 
@@ -60,24 +60,18 @@ def test_artifact_accepts_valid_data():
 def test_artifact_rejects_bad_hash():
     with pytest.raises(ValidationError):
         SourceArtifact(
-            municipality_code="QC",
-            source_url="https://x",
+            municipality_code="QC", source_url="https://x",
             retrieved_at=datetime.now(UTC),
-            http_status=200,
-            content_length=1,
-            sha256="not-a-hash",
+            http_status=200, content_length=1, sha256="not-a-hash",
         )
 
 
 def test_artifact_rejects_bad_http_status():
     with pytest.raises(ValidationError):
         SourceArtifact(
-            municipality_code="QC",
-            source_url="https://x",
+            municipality_code="QC", source_url="https://x",
             retrieved_at=datetime.now(UTC),
-            http_status=999,
-            content_length=1,
-            sha256=SHA256_OK,
+            http_status=999, content_length=1, sha256=SHA256_OK,
         )
 
 
@@ -94,20 +88,16 @@ def test_identity_stable_flag():
 def test_identity_rejects_unknown_confidence():
     with pytest.raises(ValidationError):
         PropertyIdentity(
-            identity_key="X",
-            municipality_code="QC",
-            components={},
-            confidence="maybe",
+            identity_key="X", municipality_code="QC",
+            components={}, confidence="maybe",
         )
 
 
 def test_identity_accepts_uncertain():
     ident = PropertyIdentity(
-        identity_key="X",
-        municipality_code="QC",
+        identity_key="X", municipality_code="QC",
         components={"RL0104A": "A"},
-        confidence="uncertain",
-        uncertainty_reason="missing component RL0104B",
+        confidence="uncertain", uncertainty_reason="missing component RL0104B",
     )
     assert ident.is_stable is False
 
@@ -140,11 +130,8 @@ def test_observation_accepts_valid_data():
 def test_observation_rejects_bad_roll_year():
     with pytest.raises(ValidationError):
         CanonicalObservation(
-            run_id=uuid4(),
-            artifact_id=uuid4(),
-            identity=_identity(),
-            roll_year=1500,
-            release_year=2026,
+            run_id=uuid4(), artifact_id=uuid4(), identity=_identity(),
+            roll_year=1500, release_year=2026,
             outcome=ProcessingOutcome.PUBLISHED,
         )
 
@@ -152,11 +139,8 @@ def test_observation_rejects_bad_roll_year():
 def test_observation_rejects_unknown_outcome():
     with pytest.raises(ValidationError):
         CanonicalObservation(
-            run_id=uuid4(),
-            artifact_id=uuid4(),
-            identity=_identity(),
-            roll_year=2025,
-            release_year=2026,
+            run_id=uuid4(), artifact_id=uuid4(), identity=_identity(),
+            roll_year=2025, release_year=2026,
             outcome="not-an-outcome",
         )
 
@@ -164,16 +148,11 @@ def test_observation_rejects_unknown_outcome():
 def test_run_summary_reconciled_true():
     now = datetime.now(UTC)
     summary = RunSummary(
-        run_id=uuid4(),
-        municipality_code="QC-QUEBEC-CITY",
+        run_id=uuid4(), municipality_code="QC-QUEBEC-CITY",
         mapping_version="2.9",
-        discovered_units=175_478,
-        terminal_outcomes=175_478,
-        published=175_478,
-        quarantined=0,
-        rejected=0,
-        started_at=now,
-        finished_at=now,
+        discovered_units=175_478, terminal_outcomes=175_478,
+        published=175_478, quarantined=0, rejected=0,
+        started_at=now, finished_at=now,
     )
     assert summary.reconciled is True
     assert summary.delta == 0
@@ -182,16 +161,11 @@ def test_run_summary_reconciled_true():
 def test_run_summary_reconciled_false_when_unbalanced():
     now = datetime.now(UTC)
     summary = RunSummary(
-        run_id=uuid4(),
-        municipality_code="QC-QUEBEC-CITY",
+        run_id=uuid4(), municipality_code="QC-QUEBEC-CITY",
         mapping_version="2.9",
-        discovered_units=175_478,
-        terminal_outcomes=175_400,
-        published=175_400,
-        quarantined=0,
-        rejected=0,
-        started_at=now,
-        finished_at=now,
+        discovered_units=175_478, terminal_outcomes=175_400,
+        published=175_400, quarantined=0, rejected=0,
+        started_at=now, finished_at=now,
     )
     assert summary.reconciled is False
     assert summary.delta == 78
@@ -200,7 +174,8 @@ def test_run_summary_reconciled_false_when_unbalanced():
 def test_processing_outcome_values_are_stable():
     assert ProcessingOutcome.PUBLISHED.value == "published"
     assert (
-        ProcessingOutcome.QUARANTINED_UNSUPPORTED_VERSION.value == "quarantined_unsupported_version"
+        ProcessingOutcome.QUARANTINED_UNSUPPORTED_VERSION.value
+        == "quarantined_unsupported_version"
     )
     assert ProcessingOutcome.QUARANTINED_VALIDATION.value == "quarantined_validation"
     assert ProcessingOutcome.REJECTED_IDENTITY.value == "rejected_identity"

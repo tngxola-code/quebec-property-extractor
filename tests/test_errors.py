@@ -1,5 +1,4 @@
 """Error taxonomy tests. Pure domain, no I/O."""
-
 from __future__ import annotations
 
 import pytest
