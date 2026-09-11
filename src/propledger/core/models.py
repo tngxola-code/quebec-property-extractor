@@ -6,6 +6,7 @@ Every published observation carries the source artifact it came from,
 the mapping version used to interpret it, field-level lineage back to
 the raw XML tags, and exactly one terminal processing outcome.
 """
+
 from __future__ import annotations
 
 from datetime import date, datetime
