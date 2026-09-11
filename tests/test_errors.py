@@ -17,7 +17,6 @@ from propledger.core.errors import (
     ValidationError,
 )
 
-
 ALL_ERRORS = [
     ConfigurationError,
     ArtifactError,

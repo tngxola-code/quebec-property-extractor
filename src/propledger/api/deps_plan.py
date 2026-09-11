@@ -6,11 +6,11 @@ requested resource exceeds the tenant's plan limits.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from pathlib import Path
+from typing import Annotated
 
 from fastapi import Depends, HTTPException, status
 
-from propledger.core.plan import PLAN_LIMITS, PlanTier, PlanLimits
+from propledger.core.plan import PlanLimits, PlanTier, default_plan_limits
 
 
 @dataclass(frozen=True)
@@ -24,11 +24,15 @@ async def current_tenant() -> Tenant:
     return Tenant(tenant_id="local-dev", plan=PlanTier.BUSINESS)
 
 
+TenantDep = Annotated[Tenant, Depends(current_tenant)]
+
+
 def require(*, resource: str, amount: int = 1):
     """Factory that builds a FastAPI dependency for the named resource."""
 
-    async def dependency(tenant: Tenant = Depends(current_tenant)) -> None:
-        limits: PlanLimits = PLAN_LIMITS[tenant.plan]
+    async def dependency(tenant: TenantDep) -> None:
+        limits: PlanLimits = default_plan_limits()[tenant.plan]
+
         if resource == "api_call":
             cap = limits.api_calls_per_month
             if cap == 0:
@@ -41,12 +45,14 @@ def require(*, resource: str, amount: int = 1):
                     status.HTTP_403_FORBIDDEN,
                     detail="API call quota exceeded for current plan",
                 )
+
         elif resource == "export":
             if not limits.exports_enabled:
                 raise HTTPException(
                     status.HTTP_403_FORBIDDEN,
                     detail="Export requires Professional or higher",
                 )
+
         elif resource == "portfolio":
             cap = limits.portfolio_properties
             if cap == 0:
@@ -59,6 +65,7 @@ def require(*, resource: str, amount: int = 1):
                     status.HTTP_403_FORBIDDEN,
                     detail=f"Portfolio cap {cap} exceeded",
                 )
+
         elif resource == "sso":
             if not limits.sso_enabled:
                 raise HTTPException(
@@ -67,7 +74,3 @@ def require(*, resource: str, amount: int = 1):
                 )
 
     return dependency
-
-
-# Fallback constant for callers that import PLAN_LIMITS from here.
-PLAN_LIMITS = PLAN_LIMITS

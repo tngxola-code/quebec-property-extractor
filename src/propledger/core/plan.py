@@ -1,18 +1,19 @@
 """Subscription plan tiers and limits.
 
 Pure domain module. No I/O, no SQLAlchemy, no FastAPI.
-Reads nothing at import time; the loader is explicit.
+Loading is explicit and cached; nothing runs at import time.
 """
 from __future__ import annotations
 
-from enum import Enum
+from enum import StrEnum
+from functools import lru_cache
 from pathlib import Path
 
 import yaml
 from pydantic import BaseModel, ConfigDict
 
 
-class PlanTier(str, Enum):
+class PlanTier(StrEnum):
     EXPLORER = "explorer"
     PROFESSIONAL = "professional"
     BUSINESS = "business"
@@ -45,6 +46,11 @@ class Plan(BaseModel):
     limits: PlanLimits
 
 
+def default_pricing_path() -> Path:
+    """Canonical location of pricing.yaml relative to this module."""
+    return Path(__file__).resolve().parents[3] / "configurations" / "pricing.yaml"
+
+
 def load_plans(pricing_path: Path) -> dict[PlanTier, Plan]:
     raw = yaml.safe_load(pricing_path.read_text(encoding="utf-8"))
     plans: dict[PlanTier, Plan] = {}
@@ -58,3 +64,9 @@ def load_plans(pricing_path: Path) -> dict[PlanTier, Plan]:
             limits=PlanLimits(**spec["limits"]),
         )
     return plans
+
+
+@lru_cache(maxsize=1)
+def default_plan_limits() -> dict[PlanTier, PlanLimits]:
+    """Cached limits loaded from the canonical pricing path."""
+    return {tier: plan.limits for tier, plan in load_plans(default_pricing_path()).items()}

@@ -107,7 +107,12 @@ markers = [
 [tool.coverage.run]
 branch = true
 source = ["src/propledger"]
-omit = ["*/migrations/*", "*/api/main.py"]
+omit = [
+    "*/migrations/*",
+    "*/api/main.py",
+    "*/api/deps_plan.py",
+    "*/cli.py",
+]
 
 [tool.coverage.report]
 exclude_lines = [

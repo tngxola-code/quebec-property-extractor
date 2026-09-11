@@ -3,14 +3,14 @@ from __future__ import annotations
 
 import typer
 
+from propledger import __version__
+
 app = typer.Typer(help="PropLedger Quebec command line")
 
 
 @app.command()
 def version() -> None:
     """Print the installed version."""
-    from propledger import __version__
-
     typer.echo(__version__)
 
 

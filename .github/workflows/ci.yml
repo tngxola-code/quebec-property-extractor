@@ -41,7 +41,7 @@ jobs:
           cache: pip
       - run: pip install -e ".[dev]"
       - run: bandit -c pyproject.toml -r src
-      - run: pip-audit --strict --desc on
+      - run: pip-audit --strict --desc on --skip-editable
 
   test:
     name: Tests py${{ matrix.python }}
