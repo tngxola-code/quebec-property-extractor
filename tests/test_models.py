@@ -60,7 +60,8 @@ def test_artifact_accepts_valid_data():
 def test_artifact_rejects_bad_hash():
     with pytest.raises(ValidationError):
         SourceArtifact(
-            municipality_code="QC", source_url="https://x", retrieved_at=datetime.now(UTC),
+            municipality_code="QC", source_url="https://x",
+            retrieved_at=datetime.now(UTC),
             http_status=200, content_length=1, sha256="not-a-hash",
         )
 
@@ -68,7 +69,8 @@ def test_artifact_rejects_bad_hash():
 def test_artifact_rejects_bad_http_status():
     with pytest.raises(ValidationError):
         SourceArtifact(
-            municipality_code="QC", source_url="https://x", retrieved_at=datetime.now(UTC),
+            municipality_code="QC", source_url="https://x",
+            retrieved_at=datetime.now(UTC),
             http_status=999, content_length=1, sha256=SHA256_OK,
         )
 
@@ -171,7 +173,10 @@ def test_run_summary_reconciled_false_when_unbalanced():
 
 def test_processing_outcome_values_are_stable():
     assert ProcessingOutcome.PUBLISHED.value == "published"
-    assert ProcessingOutcome.QUARANTINED_UNSUPPORTED_VERSION.value == "quarantined_unsupported_version"
+    assert (
+        ProcessingOutcome.QUARANTINED_UNSUPPORTED_VERSION.value
+        == "quarantined_unsupported_version"
+    )
     assert ProcessingOutcome.QUARANTINED_VALIDATION.value == "quarantined_validation"
     assert ProcessingOutcome.REJECTED_IDENTITY.value == "rejected_identity"
     assert ProcessingOutcome.EXCLUDED_BY_POLICY.value == "excluded_by_policy"

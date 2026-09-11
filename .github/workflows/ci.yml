@@ -41,7 +41,9 @@ jobs:
           cache: pip
       - run: pip install -e ".[dev]"
       - run: bandit -c pyproject.toml -r src
-      - run: pip-audit --strict --desc on --skip-editable
+      - name: Uninstall local package before audit
+        run: pip uninstall -y propledger-quebec
+      - run: pip-audit --strict --desc on
 
   test:
     name: Tests py${{ matrix.python }}
