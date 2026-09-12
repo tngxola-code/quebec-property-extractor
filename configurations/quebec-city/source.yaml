@@ -1,0 +1,14 @@
+municipality_code: "QC-QUEBEC-CITY"
+display_name: "Ville de Quebec"
+publisher: "Ville de Quebec"
+licence: "Open data - verify current terms before commercial redistribution"
+registry:
+  index_url: "https://www.ville.quebec.qc.ca/apropos/portrait/donnees-ouvertes/"
+  cadence: "annual"
+  supported_versions: ["2.6", "2.7", "2.8", "2.9"]
+  default_mapping: "2.9"
+retrieval:
+  timeout_seconds: 120
+  user_agent: "PropLedger-Quebec/0.1 (+contact@example.com)"
+  atomic_write: true
+  verify_sha256: true

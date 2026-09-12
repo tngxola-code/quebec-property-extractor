@@ -1,0 +1,6 @@
+language: "en"
+columns:
+  - identity_key
+  - roll_year
+  - assessed_land_value
+  - assessed_building_value

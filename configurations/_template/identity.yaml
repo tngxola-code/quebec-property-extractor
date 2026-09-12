@@ -1,0 +1,7 @@
+components:
+  - RL0104A
+  - RL0104B
+  - RL0104C
+  - RL0104D
+separator: "|"
+on_collision: "reject"
